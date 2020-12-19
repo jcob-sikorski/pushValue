@@ -1,8 +1,21 @@
 package com.example.myapplication
 
-import android.text.Editable
-
 data class CustomerModel(
-    val id: Long,
-    val name: Editable? = null
-)
+    val id: Int,
+    val name: String
+
+) {
+    override fun toString(): String {
+        return "CustomerModel(id=$id, name='$name')"
+    }
+
+    @JvmName("getId1")
+    fun getId(): Int {
+        return this.id
+    }
+
+    @JvmName("getName1")
+    fun getName(): String {
+        return this.name
+    }
+}

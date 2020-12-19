@@ -16,31 +16,23 @@ class AddValueActivity: AppCompatActivity() {
         addValueSubmitButton.setOnClickListener {
             var customerModel: CustomerModel
 
-            val nickname = findViewById<View>(R.id.editTextValueName) as EditText
+            var nickname = findViewById<View>(R.id.editTextValueName) as EditText
+
 
             try {
-                customerModel = CustomerModel(-1L, nickname.text)
-                Toast.makeText(this@AddValueActivity, "Error creating customer", Toast.LENGTH_SHORT).show()
+                customerModel = CustomerModel(-1, nickname.text.toString())
+                Toast.makeText(this@AddValueActivity, customerModel.toString(), Toast.LENGTH_SHORT).show()
             }
             catch (e: Exception) {
                 Toast.makeText(this@AddValueActivity, "Error creating customer", Toast.LENGTH_SHORT).show()
-                nickname.setText("error")
-                customerModel = CustomerModel(-1L, nickname.text)
+                customerModel = CustomerModel(-1, "error")
             }
 
             val dataBaseHelper = DataBaseHelper(this@AddValueActivity)
 
             var success = dataBaseHelper.addOne(customerModel)
 
-            Toast.makeText(this@AddValueActivity, "Success= ", Toast.LENGTH_SHORT).show()
-
-
-//            val database = getSharedPreferences("database", Context.MODE_PRIVATE)
-//            database.edit().apply {
-//                putString("savedNickname", editTextValueName.text.toString())
-//            }.apply()
-//            Log.d("savedNickname", editTextValueName.text.toString())
-
+            Toast.makeText(this@AddValueActivity, "Success= $success", Toast.LENGTH_SHORT).show()
         }
 
     }
