@@ -12,15 +12,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var recyclerView: RecyclerView
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        recyclerView = findViewById(R.id.recyclerView)
+        var recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
 
         createNewList(recyclerView)
 
@@ -34,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             startActivity(Intent(this, AddValueActivity::class.java))
             createNewList(recyclerView)
-            TODO("create new list updates view for user not instantly, but after user creates another object")
+//            create new list updates view for user not instantly, but after user creates another object
         }
     }
 

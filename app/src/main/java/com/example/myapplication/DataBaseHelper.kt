@@ -78,14 +78,14 @@ class DataBaseHelper(
 
         return returnList
     }
-
-    fun databaseKeysNum(): Int {
-        val db: SQLiteDatabase = this.readableDatabase
-        val count = DatabaseUtils.queryNumEntries(db, "CUSTOMER_TABLE")
-        db.close()
-
-        return count.toInt()
-    }
+//
+//    fun databaseKeysNum(): Int {
+//        val db: SQLiteDatabase = this.readableDatabase
+//        val count = DatabaseUtils.queryNumEntries(db, "CUSTOMER_TABLE")
+//        db.close()
+//
+//        return count.toInt()
+//    }
 
 }
 
