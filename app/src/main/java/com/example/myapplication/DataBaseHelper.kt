@@ -3,9 +3,21 @@ package com.example.myapplication
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
+import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.text.Editable
+
+
+// Instead of making a new adapter each time,
+// what I did was to create a setter method in my custom adapter
+// class to set the new list. After that, just call
+//                      YourAdapter adapter = (YourAdapter) recyclerView.getAdapter();
+//                      adapter.yourSetterMethod(newList); adapter.notifyDataSetChanged();
+// That being said, it sounds like what the OP tried first
+// (just adding this on as a comment so that it may help someone else,
+// as that worked in my case)
+
 
 class DataBaseHelper(
     context: Context?
@@ -41,7 +53,7 @@ class DataBaseHelper(
     }
 
     fun getEveryone(): MutableList<CustomerModel> {
-        val returnList : MutableList<CustomerModel> = arrayListOf()
+        val returnList : MutableList<CustomerModel> = ArrayList()
 
         val db: SQLiteDatabase = this.readableDatabase
 
@@ -65,7 +77,14 @@ class DataBaseHelper(
         db.close()
 
         return returnList
+    }
 
+    fun databaseKeysNum(): Int {
+        val db: SQLiteDatabase = this.readableDatabase
+        val count = DatabaseUtils.queryNumEntries(db, "CUSTOMER_TABLE")
+        db.close()
+
+        return count.toInt()
     }
 
 }

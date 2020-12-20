@@ -9,28 +9,24 @@ import kotlinx.android.synthetic.main.row_layout.view.*
 
 
 class Recycler_View_Adapter(
-    list: List<Data>,
-    context: Context
+    var list: List<CustomerModel>,
+    var context: Context
 ) :
     RecyclerView.Adapter<View_Holder>() {
-    var list: List<Data>
-    var context: Context
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): View_Holder {
         //Inflate the layout, initialize the View Holder
         val v: View =
             LayoutInflater.from(parent.context).inflate(R.layout.row_layout, parent, false)
-        var holder = View_Holder(v.rootView, v.cardView, v.title, v.description, v.imageView)
+
+        var holder = View_Holder(v.rootView, v.cardView, v.title, v.imageView)
         return holder
     }
 
     override fun onBindViewHolder(holder: View_Holder, position: Int) {
 
         //Use the provided View Holder on the onCreateViewHolder method to populate the current row on the RecyclerView
-        holder.title.setText(list[position].title)
-        holder.description.setText(list[position].description)
-        holder.imageView.setImageResource(list[position].imageId)
-
-        //animate(holder);
+        holder.title.text = list[position].getName()
     }
 
     override fun getItemCount(): Int {
@@ -43,20 +39,15 @@ class Recycler_View_Adapter(
     }
 
     // Insert a new item to the RecyclerView on a predefined position
-    fun insert(position: Int, data: Data) {
+    fun insert(position: Int, data: CustomerModel) {
         list.toMutableList().add(position, data)
         notifyItemInserted(position)
     }
 
     // Remove a RecyclerView item containing a specified Data object
-    fun remove(data: Data?) {
+    fun remove(data: CustomerModel?) {
         val position = list.indexOf(data)
         list.toMutableList().removeAt(position)
         notifyItemRemoved(position)
-    }
-
-    init {
-        this.list = list
-        this.context = context
     }
 }

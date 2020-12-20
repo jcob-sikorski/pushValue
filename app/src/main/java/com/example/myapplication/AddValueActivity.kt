@@ -21,7 +21,7 @@ class AddValueActivity: AppCompatActivity() {
 
             try {
                 customerModel = CustomerModel(-1, nickname.text.toString())
-                Toast.makeText(this@AddValueActivity, customerModel.toString(), Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@AddValueActivity, customerModel.toString(), Toast.LENGTH_SHORT).show()
             }
             catch (e: Exception) {
                 Toast.makeText(this@AddValueActivity, "Error creating customer", Toast.LENGTH_SHORT).show()
@@ -32,7 +32,7 @@ class AddValueActivity: AppCompatActivity() {
 
             var success = dataBaseHelper.addOne(customerModel)
 
-            Toast.makeText(this@AddValueActivity, "Success= $success", Toast.LENGTH_SHORT).show()
+            finish()
         }
 
     }
