@@ -36,13 +36,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, AddValueActivity::class.java))
             createNewList(recyclerView)
         }
-//        deleteButton.setOnClickListener {
-//            Toast.makeText(
-//                this@MainActivity,
-//                DataBaseHelper(this@MainActivity).getEveryone().toString(),
-//                Toast.LENGTH_SHORT
-//            ).show()
-//        }
     }
 
     private fun createNewList(

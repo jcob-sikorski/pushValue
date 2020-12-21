@@ -60,11 +60,11 @@ class DataBaseHelper(
     fun deleteOne(customerModel: CustomerModel): Boolean? {
         var db: SQLiteDatabase? = this.writableDatabase
 
-        val queryString: String = "DELETE FROM CUSTOMER_TABLE WHERE ID = ${customerModel.getId()-1}"
-
-        Log.d("jacob", getEveryone().toString())
+        val queryString: String = "DELETE FROM CUSTOMER_TABLE WHERE ID = ${customerModel.getId()}"
 
         val cursor: Cursor? = db?.rawQuery(queryString, null)
+
+        Log.d("everyone", getEveryone().toString())
 
         return cursor?.moveToFirst()
     }
