@@ -2,12 +2,14 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemAnimator
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.row_layout.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         setSupportActionBar(toolbar)
 
         var recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
@@ -32,8 +35,14 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             startActivity(Intent(this, AddValueActivity::class.java))
             createNewList(recyclerView)
-//            create new list updates view for user not instantly, but after user creates another object
         }
+//        deleteButton.setOnClickListener {
+//            Toast.makeText(
+//                this@MainActivity,
+//                DataBaseHelper(this@MainActivity).getEveryone().toString(),
+//                Toast.LENGTH_SHORT
+//            ).show()
+//        }
     }
 
     private fun createNewList(

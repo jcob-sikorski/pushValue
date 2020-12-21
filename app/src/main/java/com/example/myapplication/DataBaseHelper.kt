@@ -3,10 +3,12 @@ package com.example.myapplication
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
-import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.text.Editable
+import android.util.Log
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 
 
 // Instead of making a new adapter each time,
@@ -25,7 +27,6 @@ class DataBaseHelper(
 
 // the first time a database is accessed.
     override fun onCreate(db: SQLiteDatabase?) {
-
         val createTableStatement =
             "CREATE TABLE CUSTOMER_TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT, CUSTOMER_NAME TEXT)"
 
@@ -38,8 +39,12 @@ class DataBaseHelper(
         db?.execSQL("DROP TABLE IF EXISTS CUSTOMER_TABLE");
 
         // Create tables again
-        onCreate(db);
+        onCreate(db)
     }
+
+//    override fun onAttachFragment (childFragment: Fragment) {
+//        val database = DataBaseHelper(childFragment)
+//    }
 
     fun addOne(customerModel: CustomerModel): Boolean {
         val db = this.writableDatabase
@@ -50,6 +55,18 @@ class DataBaseHelper(
         val insert = db.insert("CUSTOMER_TABLE", null, cv)
 
         return insert != -1L
+    }
+
+    fun deleteOne(customerModel: CustomerModel): Boolean? {
+        var db: SQLiteDatabase? = this.writableDatabase
+
+        val queryString: String = "DELETE FROM CUSTOMER_TABLE WHERE ID = ${customerModel.getId()-1}"
+
+        Log.d("jacob", getEveryone().toString())
+
+        val cursor: Cursor? = db?.rawQuery(queryString, null)
+
+        return cursor?.moveToFirst()
     }
 
     fun getEveryone(): MutableList<CustomerModel> {
@@ -74,19 +91,9 @@ class DataBaseHelper(
         }
 
         cursor.close()
-        db.close()
 
         return returnList
     }
-//
-//    fun databaseKeysNum(): Int {
-//        val db: SQLiteDatabase = this.readableDatabase
-//        val count = DatabaseUtils.queryNumEntries(db, "CUSTOMER_TABLE")
-//        db.close()
-//
-//        return count.toInt()
-//    }
-
 }
 
 private fun ContentValues.put(columnCustomerName: String, name: Editable?) {

@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 
 import android.widget.TextView
@@ -14,18 +15,9 @@ data class View_Holder(
     var itemView: View,
     var cv: CardView,
     var title: TextView,
-    var imageView: ImageView
+    var imageView: ImageView,
+    var deleteButton: Button
 
 
 ) : RecyclerView.ViewHolder(itemView) {
-//var cv: CardView
-//var title: TextView
-//var description: TextView
-//var imageView: ImageView
-//init {
-//cv = itemView.findViewById(R.id.cardView)
-//title = itemView.findViewById(R.id.title)
-//description = itemView.findViewById(R.id.description)
-//imageView = itemView.findViewById(R.id.imageView) as ImageView
-//}
 }
